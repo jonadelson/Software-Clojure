@@ -287,3 +287,41 @@ title: Glossary
 **pruning**: cutting off a branch of a search tree once it is known that nothing below it can be a solution.
 
 **search order**: the sequence in which choices are decided during backtracking; it does not change the solutions but changes how much work is done to find them.
+
+**socket**: one end of a network connection, offering an input stream to read what the peer wrote and an output stream to write to it.
+
+**server socket**: a socket that listens on a port and hands back a new socket for each client that connects.
+
+**framing**: marking where one message ends and the next begins in a byte stream that has no boundaries of its own.
+
+**length prefix**: a framing scheme in which every message is preceded by a count of the bytes that follow it.
+
+**blocking I/O**: reading or writing in a way that stops the calling thread until the operation can complete.
+
+**accept loop**: a server's loop that waits for a connection, hands it off, and goes back to waiting.
+
+**loopback address**: `127.0.0.1`, an address that only programs on the same machine can reach.
+
+**ephemeral port**: a port the operating system chooses when a program binds to port 0.
+
+**future**: a computation run on another thread whose result is obtained by dereferencing it.
+
+**promise**: a one-shot container that one thread fills with `deliver` and another waits on with `deref`.
+
+**HTTP**: the text-based request/response protocol spoken by web browsers and servers.
+
+**request line**: the first line of an HTTP request: method, target, and protocol version separated by spaces.
+
+**header**: a name/value pair after an HTTP request or status line; names are case-insensitive.
+
+**status code**: the three-digit number on an HTTP response's first line saying how the request fared.
+
+**MIME type**: a label such as `text/html` that tells a client what kind of data a body holds.
+
+**path traversal**: using `..` in a request path to reach files outside the directory being served.
+
+**handler**: a function that takes a request map and returns a response map.
+
+**middleware**: a function that takes a handler and returns a new handler with added behavior.
+
+**routing**: choosing a handler by the request's method and path.

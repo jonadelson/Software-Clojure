@@ -61,8 +61,8 @@ a system call, and we are going to be doing a lot of small ones:
 The docstring on `data-out` is a warning as much as a description. A
 buffered stream holds on to what we write until the buffer fills up or
 we call `.flush`. If we write a request and then sit waiting for the
-reply without flushing, the request is still in our buffer, the server
-is waiting for it, and both sides wait forever. Almost everyone who
+reply without flushing, the request never leaves our buffer and both
+sides wait forever. Almost everyone who
 writes network code makes this mistake exactly once.
 
 ## Framing: where does one message end?
@@ -298,8 +298,8 @@ How does the loop ever end? `.accept` blocks, so nobody can set a flag
 that it will check. Instead, closing the `ServerSocket` from another
 thread makes the blocked `.accept` throw. The `catch` catches that too,
 the `while` condition sees that the server is closed, and the loop
-exits. This is the standard trick for interrupting blocking I/O, and it
-is worth knowing because nothing else works.
+exits. This is the standard trick for interrupting blocking I/O;
+nothing else works.
 
 ```clojure
 (defn start-server
@@ -496,9 +496,9 @@ argument.
 ```
 
 The tests in `test/sdx/ftp/chunked_test.clj` send files of 0, 1, 4096,
-4097 and 100000 bytes. The sizes are chosen to land exactly on a chunk
-boundary, one byte past it, and well beyond it, because off-by-one
-errors in copy loops hide precisely at those edges.
+4097 and 100000 bytes. The sizes land exactly on a chunk boundary, one
+byte past it, and well beyond it, because off-by-one errors in copy
+loops hide at those edges.
 
 ## Many clients at once
 

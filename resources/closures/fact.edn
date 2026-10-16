@@ -1,0 +1,7 @@
+[:seq
+ [:def :fact [:n]
+  [:if [:lt [:get :n] 2]
+   1
+   [:mul [:get :n] [:call :fact [:sub [:get :n] 1]]]]]
+ [:print "5! =" [:call :fact 5]]
+ [:print "10! =" [:call :fact 10]]]

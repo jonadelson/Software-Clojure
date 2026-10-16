@@ -1,0 +1,7 @@
+[:seq
+ [:set :n 3]
+ [:while [:gt [:get :n] 0]
+  [:seq
+   [:print "n is" [:get :n]]
+   [:set :n [:sub [:get :n] 1]]]]
+ [:print "liftoff"]]

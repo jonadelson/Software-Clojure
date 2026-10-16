@@ -30,12 +30,7 @@
           "ccc"]
          (r/render (col (row (leaf 2 1 \a) (leaf 1 2 \b))
                         (leaf 3 1 \c)))))
-  (is (= ["ab.."
-         "acccc"
-          "a...."]
-         ;; not what we expect: see below
-         (r/render (row (leaf 1 3 \a) (col (leaf 1 1 \b) (leaf 4 1 \c))))))
-  (testing "the picture above is wrong on purpose; here is the right one"
+  (testing "a tall leaf beside a column"
     (is (= ["ab..."
             "acccc"
             "a...."]

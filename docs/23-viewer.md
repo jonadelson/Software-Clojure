@@ -122,8 +122,8 @@ was made:
       k)))
 ```
 
-The `cells` and `script` fields are **atoms**, which is the first time
-this book has needed mutable state on purpose. An atom is a box holding
+The `cells` and `script` fields are **atoms**, one of the few places
+in this book that reaches for mutable state on purpose. An atom is a box holding
 one immutable value; `@cells` reads the current value and `(swap! cells
 f args...)` replaces it with `(f current args...)`. The reason we need
 one is that a screen is a *device*. Its whole purpose is to remember

@@ -149,3 +149,31 @@ title: Glossary
 **expression problem**: the tension between adding new types easily (protocols) and adding new operations easily (multimethods).
 
 **reductions**: like `reduce`, but returning every intermediate result; it turns a list of sizes into a list of positions.
+
+**headless screen**: an implementation of a device protocol that records what was drawn in memory and answers input from a script, so that interactive programs can be driven by ordinary tests.
+
+**escape sequence**: a short string beginning with the escape character that a terminal interprets as a command, such as moving the cursor, rather than printing.
+
+**raw mode**: a terminal setting in which each key is delivered to the program as soon as it is pressed, without line buffering or echo.
+
+**invariant**: a property that must hold after every state change, such as "the cursor is always on screen", best re-established in one place after every action.
+
+**pure model**: program state as an immutable map plus a step function from state and input to state, with all device I/O kept at the edge.
+
+**action**: a map such as `{:op :insert :row 2 :col 5 :char "x"}` that completely describes one change to a document, separate from the code that performs it.
+
+**inverse action**: the action that exactly reverses another; insert and delete are each other's inverses.
+
+**undo stack**: a vector of actions (or states) that have been done; a **redo stack** holds those that have been undone. A new action clears the redo stack to keep history linear.
+
+**snapshot**: a saved copy of the parts of a state a change can affect, restored wholesale by undo.
+
+**structural sharing**: the property of persistent data structures that a modified copy shares all unchanged parts with the original, making old versions cheap to keep.
+
+**persistent data structure**: an immutable collection whose "updates" return new versions that share structure with the old ones.
+
+**command pattern**: representing an operation as a value that can be stored, inverted, logged, and replayed.
+
+**transducer**: a composable transformation such as `(remove pred)` that `into` can apply while pouring one collection into another without an intermediate sequence.
+
+**differential testing**: running two implementations of the same behavior on the same inputs and requiring identical results, each acting as the other's oracle.

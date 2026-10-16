@@ -1,9 +1,9 @@
 title: Software Design by Example in Clojure
 description: A tool-based introduction to software design, ported to Clojure from Greg Wilson's Software Design by Example in Python.
 # If this site is served from https://USER.github.io/REPO/, set baseurl to /REPO.
-baseurl: "/software-clojure"
+baseurl: "/Software-Clojure"
 url: ""
-repo_url: "https://github.com/jonadelson/software-clojure"
+repo_url: "https://github.com/jonadelson/Software-Clojure"
 markdown: kramdown
 highlighter: rouge
 permalink: pretty

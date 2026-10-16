@@ -177,3 +177,45 @@ title: Glossary
 **transducer**: a composable transformation such as `(remove pred)` that `into` can apply while pouring one collection into another without an intermediate sequence.
 
 **differential testing**: running two implementations of the same behavior on the same inputs and requiring identical results, each acting as the other's oracle.
+
+**var**: the box a global definition lives in; a call looks inside the box at run time, which is why replacing its contents changes what callers do.
+
+**root binding**: the value a var holds for every thread, changed by `alter-var-root` or `with-redefs`.
+
+**dynamic var**: a var marked `^:dynamic` whose value `binding` can replace for the current thread only, for the extent of a block.
+
+**mock**: a predictable stand-in for a real dependency, such as a clock or a network service, swapped in while a test runs.
+
+**seq abstraction**: the single `seq` operation every collection function is written against; a type that implements `clojure.lang.Seqable` gets the whole library.
+
+**iterator**: a stateful cursor over a collection with "is there more?" and "give me the next" operations.
+
+**deftype**: defines a new class with named fields and only the interfaces you choose to implement.
+
+**reify**: creates an anonymous instance of one or more interfaces or protocols with method bodies given inline.
+
+**macro**: a function that runs at compile time, receives its arguments as unevaluated code, and returns code to compile in its place.
+
+**context manager**: a construct that runs setup before a block of code and cleanup after it, whether the block returns or throws; in Clojure, usually a macro built around `try`/`finally`.
+
+**content-addressed storage**: storing data under a name derived from a hash of its contents rather than from where it came from.
+
+**manifest**: a dated text file recording which path had which content hash when a backup was made.
+
+**idempotent**: an operation whose effect is the same whether it is performed once or many times.
+
+**integrity check**: confirming that a stored file's contents still hash to the name it was stored under.
+
+**linter**: a tool that reads source code and reports likely mistakes that the compiler accepts.
+
+**reader**: the function `read` that turns text into Clojure forms without evaluating them.
+
+**form**: one unit of Clojure code as data: a list, vector, map, symbol, or literal.
+
+**metadata**: a map attached to a value without affecting its equality, read back with `meta`.
+
+**tree-seq**: a function returning a lazy depth-first seq of every node in nested data.
+
+**finding**: one reported problem from a linter, a map of `{:line n :message s}`.
+
+**heuristic**: a rule that is right often enough to be useful without being right every time.

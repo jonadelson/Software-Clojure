@@ -348,7 +348,7 @@ exception and pulling both out:
 (deftest parsing-malformed-patterns
   (testing "an unclosed group reports where it was opened"
     (is (= ["unclosed '{' opened at position 3" 3] (error-of "abc{d,e")))
-    (is (= ["unclosed '{' opened at position 1" 1] (error-of "a{{b}"))))
+    (is (= ["unclosed '{' opened at position 1" 1] (error-of "{% raw %}a{{b}{% endraw %}"))))
   (testing "a stray closing brace or comma is an error where it appears"
     (is (= ["unexpected '}' at position 1" 1] (error-of "a}b")))
     (is (= ["unexpected ',' at position 2" 2] (error-of "ab,c"))))
@@ -357,7 +357,7 @@ exception and pulling both out:
 ```
 
 The second case is the kind that is easy to get wrong by hand. In
-`a{{b}`, the inner group is closed and the outer one is not, so the
+`{% raw %}a{{b}{% endraw %}`, the inner group is closed and the outer one is not, so the
 right position to report is 1, not 2. The first draft of that test
 expected 2; the parser was right and the test was wrong, which is a
 reminder that tests are code and can have bugs of their own.

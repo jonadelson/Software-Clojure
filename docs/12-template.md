@@ -91,7 +91,7 @@ The directives are:
 | `z-num="name"` | The same, formatted as a number. |
 
 Why put the language in attributes rather than inventing a syntax like
-`{{ title }}`? Because a template that is valid HTML can be opened in a
+`{% raw %}{{ title }}{% endraw %}`? Because a template that is valid HTML can be opened in a
 browser, checked by the [validator](../11-html/), and parsed by the
 parser we already have. The designer of the page and the author of the
 expander never have to agree on anything except a prefix.

@@ -219,3 +219,71 @@ title: Glossary
 **finding**: one reported problem from a linter, a map of `{:line n :message s}`.
 
 **heuristic**: a rule that is right often enough to be useful without being right every time.
+
+**test runner**: a program that finds tests by a convention, runs each one so that no test can stop the run, and reports the outcomes.
+
+**ns-publics**: the function that returns a namespace's public vars as a map from symbol to var, which is how a program inspects code it has never seen.
+
+**thunk**: a function of no arguments, used to package up work so that something else can run it later.
+
+**setup and teardown**: code run before and after each test, with teardown guaranteed by `finally`.
+
+**special form**: an operation that must see its arguments before they are evaluated, such as `:if` or `:while`, as opposed to one that is a plain function of its evaluated arguments.
+
+**open dispatch**: the property of multimethods that a `defmethod` in any namespace can add a case, so that a core can be extended without being edited.
+
+**lexical scope**: the rule that a function sees the variables visible where it was written; implemented by making a call frame's parent the closure's captured frame.
+
+**dynamic scope**: the rule that a function sees the variables of whoever is currently calling it.
+
+**call stack**: the chain of frames from the current call outward; because closures can keep frames alive, the live frames really form a tree.
+
+**append-only log**: a store to which records are only ever added at the end, so that an update is a new version after the old one and nothing is overwritten.
+
+**index**: a map from a record's key to its position in a log; derived data that can always be rebuilt by scanning the log.
+
+**derived value**: a value that is a cache of information already present elsewhere, kept for speed rather than as a source of truth.
+
+**fixed-size block**: a record encoded into a constant number of bytes, so that the position of record *n* in a file is *n* times the block size.
+
+**schema**: a data description of a record's fields, their order, and their types, from which packing and unpacking code is driven.
+
+**big-endian**: a byte order in which the most significant byte of a number is stored first; the default for `java.nio.ByteBuffer`.
+
+**page**: a fixed group of consecutive blocks read from or written to a file as a unit.
+
+**LRU cache**: a least-recently-used cache: a bounded store that, when full, discards the entry that has gone longest without being touched.
+
+**durability**: the guarantee that data acknowledged as written survives a crash; it requires syncing to disk.
+
+**build manager**: a tool that reads a description of how targets depend on each other and runs the rules needed to bring requested targets up to date.
+
+**target**: a named thing a build produces, with the targets it depends on and the rule that makes it; a **source** is a target with no rule that must already exist.
+
+**directed acyclic graph (DAG)**: a graph whose edges have direction and which contains no cycles; the shape a dependency graph must have for a build to be possible.
+
+**topological sort**: an ordering of a DAG's nodes in which every node comes after all the nodes it depends on.
+
+**Kahn's algorithm**: a topological sort that repeatedly takes a node with no unvisited dependencies, and detects a cycle when nodes remain but none is ready.
+
+**stale**: the state of a target that must be rebuilt because it is missing, a dependency is newer, or a dependency was rebuilt in the same run.
+
+**pattern rule**: a rule whose target contains a wildcard so that one rule describes how to make every file matching it.
+
+**automatic variable**: a placeholder in a rule such as `$@` or `$<` that stands for the target or its dependencies when the rule is instantiated.
+
+**dry run**: running a build tool so that it prints the commands it would execute without executing them.
+
+**package manager**: a tool that selects one version of every package in a set of dependencies such that every package's constraints on the others hold.
+
+**constraint**: a rule about which versions of a dependency a package version can work with, given as a set of versions or as an expression such as `>=1.2,<3`.
+
+**candidate**: an assignment of exactly one version to every package, which may or may not satisfy all constraints.
+
+**cartesian product**: every way of picking one element from each of several collections; the set of all candidates.
+
+**combinatorial explosion**: the exponential growth of the number of combinations as the number of independent choices grows, which makes exhaustive search infeasible.
+
+**pruning**: cutting off a branch of a search tree once it is known that nothing below it can be a solution.
+
+**search order**: the sequence in which choices are decided during backtracking; it does not change the solutions but changes how much work is done to find them.

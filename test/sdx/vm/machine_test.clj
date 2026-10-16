@@ -8,15 +8,6 @@
   [& instrs]
   (mapv #(apply isa/encode %) instrs))
 
-(deftest a-fresh-machine
-  (let [m (vm/new-machine (program [:hlt]))]
-    (is (= 0 (:pc m)))
-    (is (= [0 0 0 0] (:regs m)))
-    (is (= 256 (count (:ram m))))
-    (is (= 1 (first (:ram m))))
-    (is (= [] (:output m)))
-    (is (not (:halted? m)))))
-
 (deftest stepping-one-instruction
   (let [m (vm/new-machine (program [:ldc 2 42] [:hlt]))
         m' (vm/step m)]
@@ -26,6 +17,30 @@
     (testing "the original state is untouched"
       (is (= 0 (:pc m)))
       (is (= [0 0 0 0] (:regs m))))))
+
+(deftest branching
+  (testing "beq branches only on zero"
+    (let [m (vm/run (vm/new-machine (program [:ldc 0 0]
+                                             [:beq 0 3]
+                                             [:ldc 1 1]      ; skipped
+                                             [:hlt])))]
+      (is (= 0 (vm/reg m 1)))))
+  (testing "bne branches only on non-zero, so this loop runs three times"
+    (let [m (vm/run (vm/new-machine (program [:ldc 0 3] [:ldc 1 1]
+                                             [:prr 0]        ; 2
+                                             [:sub 0 1]
+                                             [:bne 0 2]
+                                             [:hlt])))]
+      (is (= ["3" "2" "1"] (:output m))))))
+
+(deftest a-fresh-machine
+  (let [m (vm/new-machine (program [:hlt]))]
+    (is (= 0 (:pc m)))
+    (is (= [0 0 0 0] (:regs m)))
+    (is (= 256 (count (:ram m))))
+    (is (= 1 (first (:ram m))))
+    (is (= [] (:output m)))
+    (is (not (:halted? m)))))
 
 (deftest halting
   (let [m (vm/run (vm/new-machine (program [:ldc 0 1] [:hlt] [:ldc 0 2])))]
@@ -55,21 +70,6 @@
 (deftest printing
   (let [m (vm/run (vm/new-machine (program [:ldc 3 8] [:prr 3] [:prr 3] [:hlt])))]
     (is (= ["8" "8"] (:output m)))))
-
-(deftest branching
-  (testing "beq branches only on zero"
-    (let [m (vm/run (vm/new-machine (program [:ldc 0 0]
-                                             [:beq 0 3]
-                                             [:ldc 1 1]      ; skipped
-                                             [:hlt])))]
-      (is (= 0 (vm/reg m 1)))))
-  (testing "bne branches only on non-zero, so this loop runs three times"
-    (let [m (vm/run (vm/new-machine (program [:ldc 0 3] [:ldc 1 1]
-                                             [:prr 0]        ; 2
-                                             [:sub 0 1]
-                                             [:bne 0 2]
-                                             [:hlt])))]
-      (is (= ["3" "2" "1"] (:output m))))))
 
 (deftest running-into-empty-memory
   (testing "a program that forgets to halt hits a zero word"

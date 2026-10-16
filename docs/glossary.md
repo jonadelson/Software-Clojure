@@ -69,3 +69,41 @@ title: Glossary
 **round-trip test**: checking that printing the parsed form of an input gives back the input, which tests the parser against an independent printer.
 
 **separation of concerns**: giving each layer one kind of input and one job so that each changes for its own reasons and can be tested alone.
+
+**virtual machine**: a program that imitates a processor by repeatedly fetching, decoding, and executing instructions stored as numbers in memory.
+
+**instruction set**: the fixed list of operations a machine understands; in [Chapter 25](../25-vm/), a data table shared by the machine, assembler, disassembler, and debugger.
+
+**register**: one of a small number of named storage slots inside a machine that instructions operate on directly.
+
+**program counter**: the address of the next instruction to execute, advanced before each instruction runs so that branches can overwrite it.
+
+**op code**: the number in the low byte of an instruction word that identifies which instruction it is.
+
+**fetch-decode-execute cycle**: the loop a processor runs: read the word at the program counter, unpack it, carry it out.
+
+**assembler**: a translator from readable text with mnemonics and labels into the integer words a machine runs.
+
+**label**: a name given to a memory address in assembly source, resolved to a number by the assembler's first pass.
+
+**two-pass assembly**: assembling in two sweeps so that a label can be referred to before the line that defines it.
+
+**disassembler**: a translator from words back into assembly text, which cannot by itself tell code from data.
+
+**bit packing**: storing several small fields in one integer using shifts and masks.
+
+**debugger**: a tool that runs a program under the user's control, stopping it so that its state can be inspected.
+
+**breakpoint**: an address at which a debugger stops the machine whenever execution reaches it.
+
+**single-stepping**: executing exactly one instruction and then stopping.
+
+**dependency injection**: passing the things a function needs, such as input and output functions, as arguments instead of having it reach out for them.
+
+**command table**: a map from the text a user can type to a description and the function that handles it, which can print its own help and be extended with `assoc`.
+
+**scripted session**: a test that drives an interactive program with a fixed list of input lines and compares everything it wrote.
+
+**atom**: a mutable reference to an immutable value, changed with `swap!` or `reset!`; the usual way to hold state that must change in place.
+
+**forward declaration**: telling the compiler with `declare` that a var will be defined later so that it can be referenced earlier in the file.

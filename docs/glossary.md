@@ -21,3 +21,51 @@ title: Glossary
 **protocol**: a named group of functions that a type can promise to implement; Clojure dispatches protocol functions on the type of their first argument.
 
 **record**: a map-like Clojure type with named fields, created with `defrecord`, which can implement protocols.
+
+**O(n)**: a cost that grows in proportion to the size of the input.
+
+**O(n²)**: a cost that grows with the square of the input size, so ten times the input means a hundred times the work.
+
+**hash function**: a function that maps data to a small fixed-size label such that equal inputs always get equal labels.
+
+**collision**: two different inputs that receive the same hash.
+
+**pigeonhole principle**: if there are more items than labels, some label must be shared.
+
+**SHA-256**: a cryptographic hash function producing a 256-bit value, for which collisions are considered impossible in practice.
+
+**lazy sequence**: a sequence whose elements are computed only when something asks for them.
+
+**Java interop**: calling Java classes and methods directly from Clojure.
+
+**type hint**: an annotation such as `^bytes` that tells the compiler which class a value has so that method calls need no run-time lookup.
+
+**test oracle**: a simple, trusted implementation used to check the output of a faster or cleverer one.
+
+**glob**: a pattern language for file names using `*`, `?`, and `{a,b}`.
+
+**chain of responsibility**: a design in which each piece handles its own part of a job and passes the remainder to the next piece.
+
+**null object**: an implementation that does nothing, placed where `nil` would otherwise go so that callers never need to check.
+
+**backtracking**: trying each possible choice in turn and, when one leads to a dead end, returning to try the next.
+
+**table-driven test**: one test that loops over a table of cases, so that adding a case means adding a row.
+
+**tagged vector**: a vector whose first element is a keyword naming what kind of node it is, such as `[:lit "abc"]`.
+
+**data-oriented design**: representing a structure as plain values and writing operations as functions over them rather than as methods on objects.
+
+**parser**: a program that turns text into the structure a program wants.
+
+**token**: the smallest meaningful chunk of input, such as a literal, a star, or a brace.
+
+**tokenizer**: the layer that groups characters into tokens; also called a lexer.
+
+**grammar**: a written description of what well-formed input looks like, one rule per kind of thing.
+
+**recursive-descent parser**: a parser with one function per grammar rule, where rules that refer to each other become functions that call each other.
+
+**round-trip test**: checking that printing the parsed form of an input gives back the input, which tests the parser against an independent printer.
+
+**separation of concerns**: giving each layer one kind of input and one job so that each changes for its own reasons and can be tested alone.

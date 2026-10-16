@@ -1,0 +1,9 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}}
+ :aliases
+ {;; Run every test under test/ with:  clojure -M:test
+  ;; Run one chapter with:            clojure -M:test sdx.glob-test
+  :test {:extra-paths ["test"]
+         :main-opts ["-m" "sdx.test-main"]}
+  ;; Start a REPL with the test path on the classpath:  clojure -M:dev
+  :dev {:extra-paths ["test"]}}}

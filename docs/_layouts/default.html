@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+{% assign chapters = site.pages | where_exp: "p", "p.nav_order" | sort: "nav_order" %}
+<nav class="sidebar">
+  <a class="home" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <ol>
+  {% for ch in chapters %}
+    <li{% if ch.url == page.url %} class="current"{% endif %}>
+      <a href="{{ ch.url | relative_url }}">{{ ch.title }}</a>
+    </li>
+  {% endfor %}
+  </ol>
+  <p class="small">
+    <a href="{{ '/license/' | relative_url }}">License</a> ·
+    <a href="{{ site.repo_url }}">Source</a>
+  </p>
+</nav>
+<main>
+  {% if page.nav_order %}
+  <p class="chapter-number">Chapter {{ page.nav_order }}</p>
+  {% endif %}
+  <h1>{{ page.title }}</h1>
+  {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+  {{ content }}
+  {% if page.nav_order %}
+  {% assign prev = nil %}{% assign next = nil %}
+  {% for ch in chapters %}
+    {% if ch.nav_order < page.nav_order %}{% assign prev = ch %}{% endif %}
+    {% if ch.nav_order > page.nav_order and next == nil %}{% assign next = ch %}{% endif %}
+  {% endfor %}
+  <div class="pager">
+    {% if prev %}<a class="prev" href="{{ prev.url | relative_url }}">&larr; {{ prev.title }}</a>{% endif %}
+    {% if next %}<a class="next" href="{{ next.url | relative_url }}">{{ next.title }} &rarr;</a>{% endif %}
+  </div>
+  {% endif %}
+  <footer>
+    <p>Adapted from <a href="https://third-bit.com/sdxpy/"><em>Software Design by Example: A Tool-Based Introduction with Python</em></a>
+    by Greg Wilson. Text is licensed under
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a>;
+    code is licensed under the <a href="https://firstdonoharm.dev/">Hippocratic License</a>.</p>
+  </footer>
+</main>
+</body>
+</html>

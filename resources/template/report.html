@@ -1,0 +1,11 @@
+<html lang="en">
+<head><title z-var="title">...</title></head>
+<body>
+<h1 z-var="title">...</h1>
+<p z-if="paid">Thank you for your payment of $<span z-num="total">0</span>.</p>
+<p z-if="overdue">This invoice is overdue.</p>
+<ul>
+  <li z-loop="line:lines"><span z-var="line">...</span></li>
+</ul>
+</body>
+</html>

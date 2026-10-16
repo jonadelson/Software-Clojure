@@ -1,0 +1,6 @@
+{:vars {"CC" "cc"
+        "CFLAGS" "-O2"}
+ :patterns {"%.o" {:depends ["%.c" "defs.h"]
+                   :rule "${CC} ${CFLAGS} -c $< -o $@"}}
+ :targets {"app" {:depends ["main.o" "util.o"]
+                  :rule "${CC} $^ -o $@"}}}

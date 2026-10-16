@@ -1,0 +1,5 @@
+{:title "Invoice 42"
+ :paid true
+ :overdue false
+ :total 1234.5
+ :lines ["Widgets <small>" "Shipping & handling"]}

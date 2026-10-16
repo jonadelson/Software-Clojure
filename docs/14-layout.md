@@ -232,6 +232,16 @@ The placement test that matters most is the one where a row sits inside
 a column, because it checks that the offset passed to the inner row is
 really passed on to the inner row's children:
 
+The test uses a one-line helper that pulls out the corner of each child,
+which keeps the assertions short enough to read at a glance:
+
+```clojure
+(defn- corners
+  "The [x y] of each child of a placed block."
+  [placed]
+  (mapv (juxt :x :y) (:children placed)))
+```
+
 ```clojure
 (deftest placement-is-relative-to-the-parent
   (let [placed (pl/layout (col (leaf 5 2) (row (leaf 1 1) (leaf 1 1))))
@@ -453,6 +463,16 @@ check pictures. The one below is the case that motivated wrapping the
 children first: the inner row is four wide, but once it wraps to two
 wide, the outer row fits in three columns and does not need to wrap at
 all.
+
+Here too a small helper does the wrapping and rendering in one step so
+that each test is just a block, a width, and the picture we expect:
+
+```clojure
+(defn- picture
+  "Render `block` after wrapping it at `max-width`."
+  [block max-width]
+  (r/render (w/wrap block max-width)))
+```
 
 ```clojure
 (deftest inner-rows-wrap-before-outer-ones

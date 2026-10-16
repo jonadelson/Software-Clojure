@@ -107,3 +107,45 @@ title: Glossary
 **atom**: a mutable reference to an immutable value, changed with `swap!` or `reset!`; the usual way to hold state that must change in place.
 
 **forward declaration**: telling the compiler with `declare` that a var will be defined later so that it can be referenced earlier in the file.
+
+**element**: a node in a parsed HTML tree, `{:tag :attrs :children}`; text nodes are plain strings and the root's tag is `:document`.
+
+**self-closing tag**: a tag like `<br/>` that is an element with no children and needs no closing tag.
+
+**Visitor pattern**: separating the code that walks a tree from the code that acts at each node; in [Chapter 11](../11-html/), a map of `:enter`, `:exit`, and `:text` callbacks.
+
+**path**: the vector of tags from the top of a document down to the current element, which tells a callback where it is.
+
+**accumulator**: the value threaded through every step of a walk or a reduce so that the walk has no state of its own.
+
+**violation**: a map `{:rule :path :message}` describing one problem found by a check.
+
+**template**: a document that is mostly fixed, with directives marking where data is filled in.
+
+**directive**: an instruction embedded in a template, such as a `z-if` or `z-loop` attribute, that tells the expander to do something to its element.
+
+**interpreter**: a program that walks a representation of another program and carries out its instructions.
+
+**environment**: the place variable values are looked up; often a stack of maps, one per scope.
+
+**frame**: one map in an environment stack, pushed when a scope such as a loop body or function call begins.
+
+**scope**: the region of a program in which a variable binding is visible.
+
+**shadowing**: an inner binding hiding an outer one of the same name until the inner scope ends.
+
+**escaping**: replacing characters such as `&`, `<`, and `>` in inserted text so that data cannot become markup.
+
+**EDN**: Clojure's data notation, read with `clojure.edn/read-string` without evaluating anything.
+
+**block**: a node in a layout tree: a leaf of fixed size, a row, or a column.
+
+**bottom-up pass**: a tree traversal that computes each node from its children, such as sizing.
+
+**top-down pass**: a tree traversal that computes each node from its parent, such as placement.
+
+**wrapping**: rewriting a row that is wider than the page into a column of rows.
+
+**expression problem**: the tension between adding new types easily (protocols) and adding new operations easily (multimethods).
+
+**reductions**: like `reduce`, but returning every intermediate result; it turns a list of sizes into a list of positions.
